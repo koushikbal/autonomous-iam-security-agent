@@ -1,0 +1,13 @@
+terraform {
+  required_providers { aws = { source = "hashicorp/aws", version = "~> 5.0" } }
+}
+
+resource "aws_iam_policy" "overprivileged" {
+  name        = "overprivileged-application-policy"
+  description = "Intentionally vulnerable policy for scanner tests"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{ Effect = "Allow", Action = "*", Resource = "*" }]
+  })
+}
+
